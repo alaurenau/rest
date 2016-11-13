@@ -1,4 +1,4 @@
-package com.company;
+package org.lavr;
 
 public class Main {
 
