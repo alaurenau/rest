@@ -17,4 +17,5 @@ if (!project.plugins.findPlugin(org.akhikhl.gretty.GrettyPlugin))
 
 gretty {
   contextPath = '/'
+  debugSuspend = false
 }

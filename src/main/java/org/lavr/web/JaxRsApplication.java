@@ -1,4 +1,7 @@
-package org.lavr;
+package org.lavr.web;
+
+import org.lavr.web.resource.JaxRsResource;
+import org.lavr.web.resource.VehicleResource;
 
 import javax.ws.rs.core.Application;
 import java.util.Collections;
@@ -11,6 +14,7 @@ public class JaxRsApplication extends Application {
     public JaxRsApplication() {
         HashSet<Class<?>> c = new HashSet<>();
         c.add(JaxRsResource.class);
+        c.add(VehicleResource.class);
         classes = Collections.unmodifiableSet(c);
     }
 
