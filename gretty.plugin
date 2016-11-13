@@ -14,3 +14,7 @@ repositories {
 
 if (!project.plugins.findPlugin(org.akhikhl.gretty.GrettyPlugin))
   project.apply(plugin: org.akhikhl.gretty.GrettyPlugin)
+
+gretty {
+  contextPath = '/'
+}
