@@ -1,5 +1,6 @@
 # Exclude all compilation files directory
 target/
+build/
 out/
 jar/
 
