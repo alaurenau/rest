@@ -1,0 +1,3 @@
+include 'api', 'repository', 'service', 'web'
+
+rootProject.name = 'rest'
