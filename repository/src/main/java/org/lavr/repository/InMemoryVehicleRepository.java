@@ -37,4 +37,12 @@ public class InMemoryVehicleRepository implements VehicleRepository {
     public void delete(Vehicle vehicle) {
         vehicles.remove(vehicle.getVin());
     }
+
+    public ConcurrentMap<String, Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(ConcurrentMap<String, Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
 }

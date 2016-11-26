@@ -3,17 +3,28 @@ allprojects {
     version = '0.1'
     repositories {
         mavenCentral()
+        jcenter()
     }
 }
 
 subprojects {
     apply plugin: 'java'
+    test {
+        useTestNG() {
+            suites "src/test/resources/testng.xml"
+        }
+        testLogging {
+            showStandardStreams = true
+            exceptionFormat = 'full'
+        }
+    }
 }
 
 ext {
     jerseyVersion = '2.24'
     jacksonVersion = '2.8.4'
     springVersion = '4.3.3.RELEASE'
+    testngVersion = '6.9.12'
 }
 
 task wrapper(type: Wrapper) {

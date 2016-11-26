@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="default" verbose="10" annotations="JDK">
+    <test name="repository">
+        <packages>
+            <package name="org.lavr.repository"/>
+        </packages>
+    </test>
+</suite>
