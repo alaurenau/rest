@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="integration">
+    <test name="repository" verbose="1">
+        <packages>
+            <package name="org.lavr.repository"/>
+        </packages>
+    </test>
+</suite>

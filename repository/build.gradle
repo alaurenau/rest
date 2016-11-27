@@ -1,6 +1,37 @@
+sourceSets {
+    integrationTest {
+        java.srcDir file('src/integration-test/java')
+        resources.srcDir file('src/integration-test/resources')
+        compileClasspath += main.output + configurations.testRuntime
+        runtimeClasspath += compileClasspath
+    }
+}
+
 dependencies {
     compile project(':api')
     compile "org.springframework:spring-core:${springVersion}"
     compile "org.springframework:spring-context:${springVersion}"
     testCompile "org.testng:testng:${testngVersion}"
+    integrationTestCompile "org.springframework:spring-test:${springVersion}"
 }
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+
+    useTestNG() {
+        suites "src/integration-test/resources/testng.xml"
+    }
+
+    reports {
+        html.destination = "$buildDir/reports/tests/integration-test"
+    }
+
+    testLogging {
+        // Enable full logging for tests execution
+        setLifecycle(testLogging.debug)
+    }
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
