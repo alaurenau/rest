@@ -6,6 +6,9 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="elasticsearchVehicleRepository" class="org.lavr.repository.ElasticsearchVehicleRepository"/>
+    <bean id="elasticsearchVehicleRepository" class="org.lavr.repository.ElasticsearchVehicleRepository">
+        <property name="transportPort" value="9307"/>
+        <property name="elasticCluster" value="elasticsearch"/>
+    </bean>
 
 </beans>

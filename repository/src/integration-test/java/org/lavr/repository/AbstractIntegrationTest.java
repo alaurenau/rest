@@ -16,8 +16,8 @@ import java.net.UnknownHostException;
 public abstract class AbstractIntegrationTest extends AbstractTestNGSpringContextTests {
 
     private String transportAddress = "localhost";
-    private Integer transportPort = 9300;
-    private String elasticCluster = "cluster";
+    private Integer transportPort = 9307;
+    private String elasticCluster = "elasticsearch";
     private String elasticIndex = "index";
     private String elasticType = "vehicle";
 

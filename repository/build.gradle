@@ -1,3 +1,5 @@
+apply from: 'elastic.gradle'
+
 sourceSets {
     integrationTest {
         java.srcDir file('src/integration-test/java')
@@ -18,21 +20,25 @@ dependencies {
 }
 
 task integrationTest(type: Test) {
+    description = 'Runs the integration tests.'
+    group = 'verification'
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
 
-    useTestNG() {
+    useTestNG {
         suites "src/integration-test/resources/testng.xml"
     }
 
     reports {
-        html.destination = "$buildDir/reports/tests/integration-test"
+        html.destination = file("$reports.html.destination/integration")
+        junitXml.destination = file("$reports.junitXml.destination/integration")
     }
 
-    testLogging {
-        // Enable full logging for tests execution
-        setLifecycle(testLogging.debug)
-    }
+    // Enable full logging for tests execution
+    testLogging.setLifecycle(testLogging.debug)
+
+    dependsOn startES
+    finalizedBy stopES
 }
 
 check.dependsOn integrationTest
