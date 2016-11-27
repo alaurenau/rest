@@ -36,7 +36,6 @@ public class InMemoryVehicleRepositoryTest {
     public void testInsert() throws Exception {
         // Given
         InMemoryVehicleRepository repository = new InMemoryVehicleRepository();
-        System.out.println("test test");
         Vehicle vehicle = new Vehicle();
         vehicle.setVin("123");
         vehicle.setMake("Bmw");

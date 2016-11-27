@@ -1,25 +1,3 @@
-allprojects {
-    group = 'org.lavr'
-    version = '0.1'
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-}
-
-subprojects {
-    apply plugin: 'java'
-    test {
-        useTestNG() {
-            suites "src/test/resources/testng.xml"
-        }
-        testLogging {
-            showStandardStreams = true
-            exceptionFormat = 'full'
-        }
-    }
-}
-
 ext {
     jerseyVersion = '2.24'
     jacksonVersion = '2.8.4'
@@ -27,6 +5,35 @@ ext {
     testngVersion = '6.9.12'
 }
 
+allprojects {
+    group = 'org.lavr'
+    version = '0.1'
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    test {
+        useTestNG() {
+            suites "src/test/resources/testng.xml"
+        }
+        testLogging {
+            // Enable full logging for tests execution
+            setLifecycle(testLogging.debug)
+            // Run tests in forks, in chunks of 5
+            forkEvery = 5
+            maxParallelForks = Runtime.runtime.availableProcessors()
+        }
+    }
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '3.1'
+    // Ensure downloading zip with sources and docs
+    distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
