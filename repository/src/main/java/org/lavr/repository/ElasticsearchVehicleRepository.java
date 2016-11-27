@@ -3,9 +3,9 @@ package org.lavr.repository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.lavr.api.Vehicle;
 import org.springframework.stereotype.Repository;
 
@@ -29,8 +29,8 @@ public class ElasticsearchVehicleRepository implements VehicleRepository {
     @PostConstruct
     public void init() {
         try {
-            Settings settings = Settings.settingsBuilder().put("cluster.name", elasticCluster).build();
-            elasticClient = TransportClient.builder().settings(settings).build()
+            Settings settings = Settings.builder().put("cluster.name", elasticCluster).build();
+            elasticClient = new PreBuiltTransportClient(settings)
                     .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(transportAddress), transportPort));
         } catch (UnknownHostException e) {
             e.printStackTrace();

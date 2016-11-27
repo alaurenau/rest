@@ -1,9 +1,9 @@
 package org.lavr.repository;
 
 import org.elasticsearch.client.Client;
-import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.AfterMethod;
@@ -27,8 +27,8 @@ public abstract class AbstractIntegrationTest extends AbstractTestNGSpringContex
     @BeforeClass
     public void setUp() throws Exception {
         try {
-            Settings settings = Settings.settingsBuilder().put("cluster.name", elasticCluster).build();
-            elasticClient = TransportClient.builder().settings(settings).build()
+            Settings settings = Settings.builder().put("cluster.name", elasticCluster).build();
+            elasticClient = new PreBuiltTransportClient(settings)
                     .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(transportAddress), transportPort));
         } catch (UnknownHostException e) {
             e.printStackTrace();

@@ -1,20 +1,20 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url 'http://dl.bintray.com/gesellix/gradle-plugins' }
+        maven { url "${rootProject.projectDir}/gradle/lib" }
     }
 
     dependencies {
-        classpath "de.gesellix:gradle-elastic-plugin:0.0.12"
+        classpath "de.gesellix:gradle-elastic-plugin:0.0.14"
     }
 }
 
 project.apply(plugin: ajk.gradle.elastic.ElasticPlugin)
 
-def version = "2.3.4"
+def version = "5.0.1"
 def elasticDir = "$System.env.HOME/.embedelastic"
 
-task startES {
+task startElastic {
     doFirst {
         startElastic {
             httpPort = 9207
@@ -27,7 +27,7 @@ task startES {
     }
 }
 
-task stopES {
+task stopElastic {
     doFirst {
         stopElastic {
             httpPort = 9207
