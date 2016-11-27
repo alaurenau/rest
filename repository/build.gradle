@@ -11,6 +11,8 @@ dependencies {
     compile project(':api')
     compile "org.springframework:spring-core:${springVersion}"
     compile "org.springframework:spring-context:${springVersion}"
+    compile "org.elasticsearch:elasticsearch:${elasticVersion}"
+    compile "com.google.code.gson:gson:${gsonVersion}"
     testCompile "org.testng:testng:${testngVersion}"
     integrationTestCompile "org.springframework:spring-test:${springVersion}"
 }

@@ -1,29 +1,29 @@
 package org.lavr.repository;
 
 import org.lavr.api.Vehicle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-public class InMemoryVehicleRepositoryTest {
+public class ElasticsearchVehicleRepositoryTest extends AbstractIntegrationTest {
+
+    @Autowired
+    @Qualifier("elasticsearchVehicleRepository")
+    private VehicleRepository repository;
+
     @Test
     public void testGetByVin() throws Exception {
         // Given
-        InMemoryVehicleRepository repository = new InMemoryVehicleRepository();
-        ConcurrentMap<String, Vehicle> vehicles = new ConcurrentHashMap<>();
-
         Vehicle vehicle = new Vehicle();
         vehicle.setVin("123");
         vehicle.setMake("Bmw");
         vehicle.setModel("X5");
         vehicle.setYear(2005);
 
-        vehicles.put(vehicle.getVin(), vehicle);
-        repository.setVehicles(vehicles);
+        repository.insert(vehicle);
 
         // When
         Vehicle vehicleActual = repository.getByVin(vehicle.getVin());
@@ -35,9 +35,8 @@ public class InMemoryVehicleRepositoryTest {
     @Test
     public void testInsert() throws Exception {
         // Given
-        InMemoryVehicleRepository repository = new InMemoryVehicleRepository();
         Vehicle vehicle = new Vehicle();
-        vehicle.setVin("123");
+        vehicle.setVin("1243");
         vehicle.setMake("Bmw");
         vehicle.setModel("X5");
         vehicle.setYear(2005);
@@ -46,7 +45,7 @@ public class InMemoryVehicleRepositoryTest {
         repository.insert(vehicle);
 
         // Then
-        Vehicle vehicleActual = repository.getVehicles().get(vehicle.getVin());
+        Vehicle vehicleActual = repository.getByVin(vehicle.getVin());
         assertNotNull(vehicleActual);
         assertEquals(vehicleActual, vehicle);
     }
