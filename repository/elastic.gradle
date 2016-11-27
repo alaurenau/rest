@@ -1,11 +1,11 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url "${rootProject.projectDir}/gradle/lib" }
+        maven { url "https://dl.bintray.com/alaurenau/gradle-plugins" }
     }
 
     dependencies {
-        classpath "de.gesellix:gradle-elastic-plugin:0.0.14"
+        classpath 'by.alaurenau:gradle-elastic-plugin:0.0.14'
     }
 }
 
