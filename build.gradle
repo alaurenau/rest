@@ -14,6 +14,12 @@ allprojects {
     group = 'org.lavr'
     version = '0.1'
     apply plugin: 'idea'
+    apply from: "$rootDir/gradle/jacoco.gradle"
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
 }
 
 subprojects {
@@ -25,11 +31,6 @@ subprojects {
     apply from: "$rootDir/gradle/pmd.gradle"
     apply from: "$rootDir/gradle/findbugs.gradle"
     apply from: "$rootDir/gradle/jdepend.gradle"
-
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
 
     test {
         useTestNG() {
@@ -49,4 +50,29 @@ task wrapper(type: Wrapper) {
     gradleVersion = '3.2.1'
     // Ensure downloading zip with sources and docs
     distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+}
+
+
+task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
+    def publishedProjects = subprojects.findAll()
+    description = 'Generates an aggregate report from all subprojects'
+
+    dependsOn(publishedProjects.check)
+
+    additionalSourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
+    classDirectories = files(publishedProjects.sourceSets.main.output)
+    executionData = files(publishedProjects.jacocoTestReport.executionData)
+    reports {
+        html.enabled = true // human readable
+        xml.enabled = true // required by coveralls
+    }
+
+    onlyIf = {
+        true
+    }
+
+    doFirst {
+        executionData = files(executionData.findAll { it.exists() })
+    }
 }

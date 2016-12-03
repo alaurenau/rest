@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="unit">
+    <test name="api" verbose="1">
+        <packages>
+            <package name="org.lavr.api"/>
+        </packages>
+    </test>
+</suite>

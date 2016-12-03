@@ -37,6 +37,11 @@ task integrationTest(type: Test) {
         junitXml.destination = file("$reports.junitXml.destination/integration")
     }
 
+    jacoco {
+        append = true
+        destinationFile = file("$buildDir/jacoco/test.exec")
+    }
+
     // Enable full logging for tests execution
     testLogging.setLifecycle(testLogging.debug)
 
