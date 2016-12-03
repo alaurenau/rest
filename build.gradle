@@ -13,10 +13,14 @@ ext {
 allprojects {
     group = 'org.lavr'
     version = '0.1'
+    apply plugin: 'idea'
 }
 
 subprojects {
     apply plugin: 'java'
+
+    ext.configDir = new File(rootDir, 'config')
+    apply from: "$rootDir/gradle/checkstyle.gradle"
 
     repositories {
         mavenCentral()
