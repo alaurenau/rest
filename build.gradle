@@ -1,18 +1,4 @@
-ext {
-    jerseyVersion = '2.24'
-    jacksonVersion = '2.8.4'
-    springVersion = '4.3.3.RELEASE'
-    testngVersion = '6.9.12'
-    gsonVersion = '1.4'
-    elasticVersion = '5.0.1'
-    logbackVersion = '1.1.7'
-    log4j2AdapterVersion = '2.7'
-    jclAdapterVersion = '1.7.21'
-}
-
 allprojects {
-    group = 'org.lavr'
-    version = '0.1'
     apply plugin: 'idea'
     apply from: "$rootDir/gradle/jacoco.gradle"
 
