@@ -18,6 +18,7 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'maven'
 
     ext.configDir = new File(rootDir, 'config')
     apply from: "$rootDir/gradle/checkstyle.gradle"
