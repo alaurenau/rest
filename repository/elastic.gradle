@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'by.alaurenau:gradle-elastic-plugin:0.0.14'
+        classpath 'by.alaurenau:gradle-elastic-plugin:0.0.15'
     }
 }
 
