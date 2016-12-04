@@ -1,25 +1,18 @@
 package org.lavr.web;
 
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.SwaggerSerializers;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.lavr.web.resource.JaxRsResource;
 import org.lavr.web.resource.VehicleResource;
 
-import javax.ws.rs.core.Application;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-public class JaxRsApplication extends Application {
-    private final Set<Class<?>> classes;
+public class JaxRsApplication extends ResourceConfig {
 
     public JaxRsApplication() {
-        HashSet<Class<?>> c = new HashSet<>();
-        c.add(JaxRsResource.class);
-        c.add(VehicleResource.class);
-        classes = Collections.unmodifiableSet(c);
+        // App resources
+        registerClasses(JaxRsResource.class, VehicleResource.class);
+        // Swagger resources
+        registerClasses(ApiListingResource.class, SwaggerSerializers.class);
     }
 
-    @Override
-    public Set<Class<?>> getClasses() {
-        return classes;
-    }
 }

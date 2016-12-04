@@ -9,5 +9,16 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <mvc:resources mapping="/**" location="/"/>
+    <import resource="classpath:serviceContext.xml"/>
+
+    <context:component-scan base-package="org.lavr.web.resource"/>
+    <context:component-scan base-package="org.lavr.web.dto.converter"/>
+
+    <bean id="swaggerConfig" class="io.swagger.jaxrs.config.BeanConfig">
+        <property name="title" value="Vehicle REST API" />
+        <property name="version" value="1.0" />
+        <property name="basePath" value="/rest" />
+        <property name="resourcePackage" value="org.lavr.web.resource" />
+        <property name="scan" value="true" />
+    </bean>
 </beans>

@@ -9,7 +9,10 @@ dependencies {
     compile("org.glassfish.jersey.ext:jersey-spring3:${jerseyVersion}") {
         exclude group: 'org.springframework'
     }
+    compile "io.swagger:swagger-jersey2-jaxrs:${swaggerVersion}"
+
     compile "org.springframework:spring-core:${springVersion}"
     compile "org.springframework:spring-context:${springVersion}"
     compile "org.springframework:spring-web:${springVersion}"
+    compile "org.springframework:spring-webmvc:${springVersion}"
 }
